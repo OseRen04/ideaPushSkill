@@ -7,8 +7,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Idea Vault",
-        "shortDescription": "Save and revisit ideas discussed in ChatGPT",
-        "longDescription": "Summarize the current state of an idea and its discussion history into separate Markdown files. With an authorized GitHub connection, explicitly requested changes can be committed to a user-selected repository.",
+        "shortDescription": "アイデアをGitHubに保存・再利用",
+        "longDescription": "Summarize ideas and discussions into idea.md and discussions.md. On explicit request, save, update, search, and resume ideas using the user's existing GitHub connection. No additional MCP server is required.",
         "developerName": "OseRen04",
         "category": "Productivity",
         "capabilities": [
@@ -23,5 +23,10 @@
         ]
       }
     }
-  }
+  },
+  "author": {
+    "name": "OseRen04"
+  },
+  "homepage": "https://github.com/OseRen04/ideaPushSkill",
+  "repository": "https://github.com/OseRen04/ideaPushSkill"
 }
