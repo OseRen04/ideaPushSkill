@@ -1,0 +1,27 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "idea-vault",
+  "version": "0.1.0",
+  "description": "Summarize ideas discussed in ChatGPT, maintain idea and discussion summaries, and save or resume them through an existing GitHub connection only on explicit user request.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Idea Vault",
+        "shortDescription": "Save and revisit ideas discussed in ChatGPT",
+        "longDescription": "Summarize the current state of an idea and its discussion history into separate Markdown files. With an authorized GitHub connection, explicitly requested changes can be committed to a user-selected repository.",
+        "developerName": "OseRen04",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://github.com/OseRen04/ideaPushSkill",
+        "defaultPrompt": [
+          "このアイデアを要約して",
+          "このアイデアをGitHubに保存して",
+          "GitHubに保存したアイデアの議論を再開したい"
+        ]
+      }
+    }
+  }
+}
