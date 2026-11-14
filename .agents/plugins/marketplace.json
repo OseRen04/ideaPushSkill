@@ -1,0 +1,21 @@
+{
+  "name": "ose-idea-tools",
+  "interface": {
+    "displayName": "Ose Idea Tools"
+  },
+  "plugins": [
+    {
+      "name": "idea-vault",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/OseRen04/ideaPushSkill.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
