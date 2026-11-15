@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea-vault",
-  "version": "0.1.0",
-  "description": "Summarize ideas discussed in ChatGPT, maintain idea and discussion summaries, and save or resume them through an existing GitHub connection only on explicit user request.",
+  "version": "0.2.0",
+  "description": "Summarize ideas and discussions, keep one freeform memo per idea folder, and save or resume content through an existing GitHub connection only on explicit user request.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Idea Vault",
-        "shortDescription": "アイデアをGitHubに保存・再利用",
-        "longDescription": "Summarize ideas and discussions into idea.md and discussions.md. On explicit request, save, update, search, and resume ideas using the user's existing GitHub connection. No additional MCP server is required.",
+        "shortDescription": "アイデア・議論・自由なメモをGitHubに保存",
+        "longDescription": "Maintain idea.md, discussions.md, and one freeform memo.md in each idea folder. Preserve memo text without automatic formatting or summarization. On explicit request, save, update, search, and resume content using the user's existing GitHub connection. No additional MCP server is required.",
         "developerName": "OseRen04",
         "category": "Productivity",
         "capabilities": [
@@ -19,7 +19,8 @@
         "defaultPrompt": [
           "このアイデアを要約して",
           "このアイデアをGitHubに保存して",
-          "GitHubに保存したアイデアの議論を再開したい"
+          "GitHubに保存したアイデアの議論を再開したい",
+          "この企画にメモして"
         ]
       }
     }
