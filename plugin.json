@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea-vault",
-  "version": "0.2.0",
-  "description": "Summarize ideas and discussions, keep one freeform memo per idea folder, and save or resume content through an existing GitHub connection only on explicit user request.",
+  "version": "0.3.0",
+  "description": "Maintain structured project plans and meeting records plus one freeform memo per root-level project folder, using an existing GitHub connection only on explicit user request.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Idea Vault",
         "shortDescription": "アイデア・議論・自由なメモをGitHubに保存",
-        "longDescription": "Maintain idea.md, discussions.md, and one freeform memo.md in each idea folder. Preserve memo text without automatic formatting or summarization. On explicit request, save, update, search, and resume content using the user's existing GitHub connection. No additional MCP server is required.",
+        "longDescription": "Maintain idea.md with user-controlled development permission, status, and priority, structured discussions.md, and one freeform memo.md directly in each root-level project folder. Preserve discussion history and raw memo text. On explicit request, save, update, search, and resume content using the user's existing GitHub connection. No additional MCP server is required.",
         "developerName": "OseRen04",
         "category": "Productivity",
         "capabilities": [
