@@ -1,2 +1,5 @@
 todo/
 /idea-vault-runner/
+__pycache__/
+.pytest_cache/
+*.py[cod]

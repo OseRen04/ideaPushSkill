@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea-vault",
-  "version": "0.4.0",
-  "description": "Maintain structured project plans and meeting records plus one freeform memo per root-level project folder, using an existing GitHub connection only on explicit user request.",
+  "version": "0.5.0",
+  "description": "Manage Idea Vault content and guide development setup through GitHub CLI and Codex authentication workflows on explicit user request.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Idea Vault",
-        "shortDescription": "アイデア・議論・自由なメモをGitHubに保存",
-        "longDescription": "Maintain structured project plans, discussion records, and one freeform memo per root-level project folder. On explicit request, use the existing GitHub connection to save content, configure development hours, stop or resume development, and inspect saved status. A separate private GitHub Actions runner executes authorized development. No additional MCP server is required.",
+        "shortDescription": "アイデア保存と開発環境の初期セットアップ",
+        "longDescription": "Maintain structured project plans, discussion records, and freeform memos. Guide requested development setup through existing-login checks, GitHub CLI authorization, Codex sign-in, optional CI credential registration, and verification. Resume interrupted setup without repeating completed steps. Use existing authorized tools; no additional MCP server is required.",
         "developerName": "OseRen04",
         "category": "Productivity",
         "capabilities": [
@@ -19,10 +19,7 @@
         "defaultPrompt": [
           "このアイデアを要約して",
           "このアイデアをGitHubに保存して",
-          "GitHubに保存したアイデアの議論を再開したい",
-          "この企画にメモして",
-          "自動開発の時間を設定して",
-          "自動開発の状況を見せて"
+          "以前保存したアイデアの議論を再開して"
         ]
       }
     }
