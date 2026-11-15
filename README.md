@@ -1,6 +1,6 @@
 # ideaPushSkill
 
-アイデアの保存と、GitHub CLI・Codexの初期セットアップを支援するスキルです。
+アイデアの保存と、GitHub CLI・Codexによる自動開発を実行するスキルです。
 
 - スキル：[Idea Vault](skills/idea-vault/SKILL.md) / [初期セットアップの流れ](skills/development-setup/README.md)
 - `<id>/idea.md`：開発許可・状態・優先度と企画内容。
