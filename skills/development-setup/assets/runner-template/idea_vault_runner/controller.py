@@ -8,6 +8,7 @@ import os
 import re
 import shutil
 import signal
+import stat
 import subprocess
 import sys
 import time
@@ -17,6 +18,7 @@ from pathlib import Path
 
 import yaml
 
+from .bootstrap import SOURCE_DOCUMENT_NAMES
 from .errors import BlockedError, QuotaThresholdReached, RunnerError
 from .runtime import SymphonyProcess, write_workflow
 from .schedule import Schedule, cron_entries, execution_window, load_schedule
@@ -36,6 +38,41 @@ def utcnow():
 
 def timestamp():
     return utcnow().isoformat()
+
+
+def read_source_documents(source, idea_id):
+    """Read optional documents from the same checkout used to select the idea."""
+    if not isinstance(idea_id, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", idea_id):
+        raise BlockedError("Invalid idea identifier.", "invalid_idea_id")
+    folder_fd = None
+    try:
+        # Relative descriptor reads keep fixed filenames inside the selected
+        # folder. Do not follow links or block while opening a named pipe.
+        folder_fd = os.open(Path(source) / idea_id, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        documents = {}
+        for name in SOURCE_DOCUMENT_NAMES:
+            try:
+                descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
+                                     dir_fd=folder_fd)
+            except FileNotFoundError:
+                continue
+            try:
+                if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+                    raise BlockedError("Optional project document is not an ordinary file.",
+                                       "invalid_source_document")
+                with os.fdopen(descriptor, "r", encoding="utf-8", newline="") as handle:
+                    descriptor = None
+                    documents[name] = handle.read()
+            finally:
+                if descriptor is not None:
+                    os.close(descriptor)
+        return documents
+    except (OSError, UnicodeError):
+        raise BlockedError("Optional project documents could not be read safely.",
+                           "source_document_unreadable") from None
+    finally:
+        if folder_fd is not None:
+            os.close(folder_fd)
 
 
 def load_config(path):
@@ -379,7 +416,8 @@ class Controller:
                 try:
                     project = prepare_project(self.github, self.config["owner"], idea,
                                               existing=existing, prefix=self.config.get("repository_prefix", "idea-"),
-                                              source_repository=self.config["ideas_repository"])
+                                              source_repository=self.config["ideas_repository"],
+                                              source_documents=read_source_documents(source, idea.id))
                     status = self.run_project(idea, project, window, raw_auth)
                     processed.append({"idea": idea.id, "status": status})
                 except QuotaThresholdReached:

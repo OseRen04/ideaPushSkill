@@ -12,7 +12,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "skills/development-setup/assets/runner-template"
-VERSION = "0.6.0"
+VERSION = "0.7.0"
 MANIFEST = "bundle-manifest.json"
 STATIC = (
     ".github/workflows/autonomous-development.yml", ".gitignore", "pyproject.toml",
@@ -117,6 +117,18 @@ Actionsは、警告Issue用のbot認証をQUOTA_NOTIFICATION_TOKENとして渡�
 利用者は、開発を許可する企画だけagent_developmentをallowedへ変更します。
 セットアップスキルは、configの時間設定をcronへ同期します。
 自動開発は、利用者による運用開始の指定後に有効にします。
+
+## 開発フローとシステム設計
+
+利用者は、企画の開発フローとシステム設計の追加をIdea Vaultへ依頼できます。
+Idea Vaultは、企画直下のdevelopment-flow.mdとsystem-design.mdへ保存します。
+通常の企画保存では、Idea Vaultは追加文書を自動作成しません。
+制御プログラムは、企画書と同じ取得時点の追加文書を開発先のdocs/へコピーします。
+制御プログラムは、標準名の2文書だけを自動開発の参照対象にします。
+制御プログラムは、開発先に保存済みの文書を自動で上書きしません。
+したがって、開発先の保存版と企画リポジトリの最新版は異なる場合があります。
+利用者は、既存開発先の文書を更新する場合、対象を明示して更新を依頼します。
+追加文書の保存は、開発許可や実行時間を変更しません。
 
 ## 残り500分の警告と停止
 

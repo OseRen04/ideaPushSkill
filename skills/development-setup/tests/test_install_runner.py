@@ -438,7 +438,8 @@ def test_github_file_and_tree_references_are_url_encoded():
 
 def test_bundled_release_is_complete_and_contains_no_execution_history():
     manifest, files = INSTALLER.load_bundle(INSTALLER.BUNDLE_DIR)
-    assert manifest["bundle_version"] == "0.6.0"
+    plugin = json.loads((INSTALLER.BUNDLE_DIR.parents[3] / "plugin.json").read_text(encoding="utf-8"))
+    assert manifest["bundle_version"] == plugin["version"]
     assert "idea_vault_runner/controller.py" in files
     assert INSTALLER.WORKFLOW in files
     assert json.loads(files["state/projects.json"])["projects"] == {}
