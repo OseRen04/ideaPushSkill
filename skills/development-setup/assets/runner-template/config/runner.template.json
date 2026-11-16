@@ -1,0 +1,34 @@
+{
+  "owner": "__OWNER__",
+  "ideas_repository": "__IDEAS_REPOSITORY__",
+  "runner_repository": "__RUNNER_REPOSITORY__",
+  "schedule_path": "settings/development-schedule.yaml",
+  "state_path": "state/projects.json",
+  "repository_prefix": "idea-",
+  "checkpoint_interval_seconds": 60,
+  "poll_interval_seconds": 10,
+  "max_retries": 2,
+  "max_projects_per_run": 5,
+  "symphony_command": [
+    "symphony"
+  ],
+  "symphony_release": "v0.0.3",
+  "codex_version": "0.169.0",
+  "codex_command": "codex app-server",
+  "workflow_template": "WORKFLOW.md",
+  "runtime_directory": "../.runtime",
+  "billing": {
+    "confirmed_stop_usage": false,
+    "stop_usage_confirmed_at": null,
+    "confirmation_expires_at": null,
+    "monthly_compute_allowance_usd": null,
+    "standard_linux_rate_usd_per_minute": null,
+    "reserve_compute_usd": 0.05,
+    "stop_remaining_minutes": 500,
+    "minimum_artifact_remaining_gb": 0.01,
+    "minimum_cache_remaining_gb": 0.01,
+    "max_snapshot_age_minutes": 60,
+    "snapshot_path": "../state/billing-snapshot.json",
+    "cache_repository": "__RUNNER_REPOSITORY__"
+  }
+}

@@ -1,10 +1,10 @@
 # ideaPushSkill
 
-アイデアの保存と、GitHub CLI・Codexの初期セットアップを支援するスキルです。
+アイデア保存と、利用者自身のGitHubへの自動開発環境の導入を支援するプラグインです。
 
-- スキル：[Idea Vault](skills/idea-vault/SKILL.md) / [初期セットアップの流れ](skills/development-setup/README.md)
+- [Idea Vault](skills/idea-vault/SKILL.md)は、企画書・議事録・メモの保存と更新を支援します。
+- [初期セットアップ](skills/development-setup/README.md)は、同梱コードを本人の非公開リポジトリへ配置します。
 - `<id>/idea.md`：開発許可・状態・優先度と企画内容。
 - `<id>/discussions.md`：議題・議論・決定事項などの議事録と会話URL。
 - `<id>/memo.md`：各企画に1つ。書式自由で原文を保存・追記・編集します。
-- 既存GitHub連携で保存先を指定し、自動開発の時間設定・停止・再開・状況確認にも対応します。
-- 「初期セットアップを進めて」で認証を案内します。通常の保存では認証を開始しません。
+- 利用者は、配置後にCI認証・費用条件・開発許可を確認します。費用停止後の再開方法は未定です。

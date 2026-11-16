@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": "owner-confirmed-github-billing",
+  "owner": "__OWNER__",
+  "cache_repository": "__RUNNER_REPOSITORY__",
+  "billing_period": null,
+  "period_start": null,
+  "period_end": null,
+  "collected_at": null,
+  "covers_through": null,
+  "compute_remaining_usd": null,
+  "artifact_remaining_gb": null,
+  "cache_remaining_gb": null
+}

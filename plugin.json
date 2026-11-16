@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea-vault",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Manage Idea Vault content and guide development setup through GitHub CLI and Codex authentication workflows on explicit user request.",
   "extensions": {
     "com.openai": {

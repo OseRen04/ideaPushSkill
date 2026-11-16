@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==82.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idea-vault-runner"
+version = "0.1.0"
+description = "Private GitHub Actions controller for authorized Idea Vault development"
+requires-python = ">=3.9"
+dependencies = ["PyYAML==6.0.3", "psutil==7.2.2"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+
+[project.scripts]
+idea-vault-runner = "idea_vault_runner.controller:main"
+
+[tool.setuptools.packages.find]
+include = ["idea_vault_runner*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

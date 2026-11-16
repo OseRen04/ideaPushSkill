@@ -1,0 +1,9 @@
+enabled: false
+timezone: Asia/Tokyo
+schedule:
+  days: [MON, TUE, WED, THU, FRI, SAT, SUN]
+  start_time: "02:00"
+  end_time: "03:00"
+limits:
+  max_duration_minutes: 60
+  max_concurrent_jobs: 1

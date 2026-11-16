@@ -1,0 +1,71 @@
+name: Idea Vault Autonomous Development
+
+# The schedule is added only by an explicit schedule synchronization.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Operation
+        type: choice
+        options: [doctor, auth-check, run]
+        default: doctor
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: idea-vault-development
+  cancel-in-progress: false
+
+jobs:
+  develop:
+    if: vars.RUNNER_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - name: Record job start
+        run: echo "RUNNER_JOB_STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+      - name: Check out private execution repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install controller
+        run: python -m pip install --disable-pip-version-check -e .
+      - name: Check free allowance and persistent stop
+        env:
+          RUNNER_GITHUB_TOKEN: ${{ secrets.RUNNER_GITHUB_TOKEN }}
+          QUOTA_NOTIFICATION_TOKEN: ${{ github.token }}
+        run: python -m idea_vault_runner.controller quota-check
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install pinned tools
+        run: |
+          npm install --global @openai/codex@0.169.0
+          python scripts/install_symphony.py
+      - name: Run selected operation
+        env:
+          RUNNER_GITHUB_TOKEN: ${{ secrets.RUNNER_GITHUB_TOKEN }}
+          DEVELOPMENT_GITHUB_TOKEN: ${{ secrets.DEVELOPMENT_GITHUB_TOKEN }}
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+          QUOTA_NOTIFICATION_TOKEN: ${{ github.token }}
+          REQUESTED_MODE: ${{ inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          mode="${REQUESTED_MODE:-run}"
+          case "$mode" in
+            doctor|auth-check|run) ;;
+            *) exit 2 ;;
+          esac
+          python -m idea_vault_runner.controller "$mode"
+      - name: Remove temporary credentials
+        if: always()
+        run: |
+          find .runtime -type f -name auth.json -delete 2>/dev/null || true
+          rm -rf .runtime
