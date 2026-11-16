@@ -1,6 +1,6 @@
 # ideaPushSkill
 
-アイデア保存と、利用者自身のGitHubへの自動開発環境の導入を支援するプラグインです。
+アイデアの保存と、GitHub CLI・Codexによる自動開発を実行するスキルです。
 
 - [Idea Vault](skills/idea-vault/SKILL.md)は、企画書・議事録・メモの保存と更新を支援します。
 - [初期セットアップ](skills/development-setup/README.md)は、同梱コードを本人の非公開リポジトリへ配置します。
